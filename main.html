@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>My todos</h1>
+	<ul></ul>
+</body>
+
+<script>
+	const electron = require("electron")
+	const { ipcRenderer } = electron
+	
+	ipcRenderer.on("mainTodoUpdate", (event, todo)=>{
+		var li = document.createElement("li")
+		var textnode = document.createTextNode(todo)
+		li.appendChild(textnode)
+		document.querySelector("ul").appendChild(li) 
+	})
+	ipcRenderer.on("removeTodos", ()=>{
+		console.log("inside removeTodos")
+		document.querySelector("ul").innerHTML = ""
+	})
+</script>
+</html>
